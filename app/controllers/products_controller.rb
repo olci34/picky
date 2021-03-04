@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
 
   get '/pickies' do
-    binding.pry
+    @pickies = Product.all
+    erb :'products/index'
   end
 end
