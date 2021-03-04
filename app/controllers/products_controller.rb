@@ -8,4 +8,12 @@ class ProductsController < ApplicationController
       redirect '/'
     end
   end
+
+  get '/pickies/new' do
+    if logged_in?
+      erb :'products/new'
+    else
+      redirect '/'
+    end
+  end
 end
