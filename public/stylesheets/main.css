@@ -1,3 +1,5 @@
+@media screen {
+  /* --- Reset Styles --- */
   * {
     list-style: none;
     margin: 0;
@@ -9,12 +11,38 @@
     width: 100%;
   }
 
-  /* --- Welcome Page Styles --- */
+  /* --- Welcome Page Styles rgb(226, 214, 106)--- */
   body {
-    background-color: lightblue;
+    background-color: rgb(127, 211, 110);
     color: #333;
-    font-family: Sans-Serif;
+    font-family: sans-serif;
     line-height: 18px;
+  }
+  
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: lightcoral;
+  }
+
+  li {
+    float: left;
+    width: 25%;
+    
+  }
+
+  li a {
+    display: block;
+    color: white;
+    padding: 14px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  li a:hover {
+    background-color: #111;
   }
 
   .wrapper {
@@ -79,3 +107,5 @@
     margin-top: 20px;
     padding-top: 20px;
   }
+}
+
