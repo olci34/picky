@@ -48,6 +48,13 @@ class ProductsController < ApplicationController
     end
   end
 
+  patch '/pickies/:id' do
+    @picky = Product.find_by_id(params[:id])
+    @picky.location.update(params[:location])
+    @picky.update(params[:product])
+    redirect "/pickies/#{@picky.id}"
+  end
+
   delete '/pickies/:id' do
     @picky = Product.find_by_id(params[:id])
     if @picky.user_id == session[:id]
@@ -57,5 +64,5 @@ class ProductsController < ApplicationController
       redirect '/'
     end
   end
-  
+
 end
