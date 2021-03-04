@@ -47,4 +47,15 @@ class ProductsController < ApplicationController
       redirect '/'
     end
   end
+
+  delete '/pickies/:id' do
+    @picky = Product.find_by_id(params[:id])
+    if @picky.user_id == session[:id]
+      @picky.destroy
+      redirect '/pickies'
+    else
+      redirect '/'
+    end
+  end
+  
 end
