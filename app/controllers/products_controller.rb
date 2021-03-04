@@ -16,4 +16,13 @@ class ProductsController < ApplicationController
       redirect '/'
     end
   end
+
+  post '/pickies' do
+    user = User.find_by_id(session[:id])
+    product = user.products.create(params[:product])
+    location = Location.find_or_create_by(params[:location])
+    product.location_id = location.id
+    product.save
+    redirect '/pickies'
+  end
 end
