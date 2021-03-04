@@ -25,4 +25,13 @@ class ProductsController < ApplicationController
     product.save
     redirect '/pickies'
   end
+
+  get '/pickies/:id' do
+    if logged_in?
+      @picky = Product.find_by_id(params[:id])
+      erb :'products/show'
+    else
+      redirect '/'
+    end
+  end
 end

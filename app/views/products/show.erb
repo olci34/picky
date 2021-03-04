@@ -1,1 +1,25 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h3><%= @picky.name %></h3>
+<br>
+
+<strong>Location</strong>
+<br>
+<%= @picky.location.address %>, <%= @picky.location.neighborhood %>, <%= @picky.location.zip_code %>
+<br><br>
+
+<strong>Posted By</strong>
+<br>
+<% if @picky.user.id == session[:id] %>
+    <a href="/users/<%=@picky.user.slug%>">You</a>
+    <br><br>
+
+    <a href="/pickies/<%=@picky.id%>/edit"><button type="button">Edit</button></a>
+    <br><br>
+
+    <form action="/pickies/<%=@picky.id%>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="DELETE">
+    <a href="/pickies/<%=@picky.id%>/edit"><button type="submit">Delete</button></a>
+    </form>
+
+<% else %>
+    <a href="/users/<%=@picky.user.slug%>"><%= @picky.user.username %></a>
+<% end %>
