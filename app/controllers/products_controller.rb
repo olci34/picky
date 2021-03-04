@@ -1,7 +1,11 @@
 class ProductsController < ApplicationController
 
   get '/pickies' do
-    @pickies = Product.all
-    erb :'products/index'
+    if logged_in?
+      @pickies = Product.all
+      erb :"/products/index"
+    else
+      redirect '/'
+    end
   end
 end

@@ -1,1 +1,28 @@
-<h1>This is the Model's index page.</h1>
+<h2 align="center">Pickies</h2>
+<br><br>
+
+<div class="pickies chart">
+    <table class="pickies chart">
+        <colgroup>
+            <col class="pickiesUser">
+            <col class="pickiesName">
+            <col class="pickiesNeighborhood">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Picky</th>
+                <th>Neighborhood</th>
+            </tr>
+        </thead>
+        <tbody class="pickies list">
+            <% @pickies.each do |p| %>
+                <tr>
+                    <td class="usernameColumn"> <a href="/users/<%= p.user.slug %>"><%= p.user.username %></a></td>
+                    <td class="pickyNameColumn"> <a href="/pickies/<%= p.id %>"> <%= p.name %></a></td>
+                    <td class="pickyAddressColumn"> <%= p.location.neighborhood %></td>
+                </tr>
+            <% end %>      
+        </tbody>
+    </table>
+</div>
