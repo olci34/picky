@@ -5,6 +5,8 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    binding.pry
+    user = User.create(params[:user])
+    session[:id] = user.id
+    redirect '/pickies'
   end
 end
