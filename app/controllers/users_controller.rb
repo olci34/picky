@@ -9,9 +9,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    user = User.create(params[:user])
-    session[:id] = user.id
-    redirect '/pickies'
+    if !params[:user].values.any? {|v| v == ""}
+      user = User.create(params[:user])
+      session[:id] = user.id
+      redirect '/pickies'
+    else
+      redirect '/signup'
+    end
   end
 
   get '/login' do
