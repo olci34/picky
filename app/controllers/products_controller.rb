@@ -1,20 +1,14 @@
 class ProductsController < ApplicationController
 
   get '/pickies' do
-    if logged_in?
-      @pickies = Product.all
-      erb :"/products/index"
-    else
-      redirect '/'
-    end
+    redirect_if_not_logged_in
+    @pickies = Product.all
+    erb :"/products/index"
   end
 
   get '/pickies/new' do
-    if logged_in?
-      erb :'products/new'
-    else
-      redirect '/'
-    end
+    redirect_if_not_logged_in
+    erb :'products/new'
   end
 
   post '/pickies' do
@@ -27,42 +21,35 @@ class ProductsController < ApplicationController
   end
 
   get '/pickies/:id' do
-    if logged_in?
-      @picky = Product.find_by_id(params[:id])
+    redirect_if_not_logged_in
+    set_picky
+    if @picky
       erb :'products/show'
     else
-      redirect '/'
+      redirect '/pickies'
     end
   end
 
   get '/pickies/:id/edit' do
-    if logged_in?
-      @picky = Product.find_by_id(params[:id])
-      if @picky.user_id == session[:id]
-        erb :'products/edit'
-      else
-        redirect "/pickies/#{@picky.id}"
-      end
-    else
-      redirect '/'
-    end
+    redirect_if_not_logged_in
+    set_picky
+    redirect_if_not_owner(@picky)
+    erb :'products/edit'
   end
 
   patch '/pickies/:id' do
-    @picky = Product.find_by_id(params[:id])
+    redirect_if_not_logged_in
+    set_picky
     @picky.location.update(params[:location])
     @picky.update(params[:product])
     redirect "/pickies/#{@picky.id}"
   end
 
   delete '/pickies/:id' do
-    @picky = Product.find_by_id(params[:id])
-    if @picky.user_id == session[:id]
-      @picky.destroy
-      redirect '/pickies'
-    else
-      redirect '/'
-    end
+    redirect_if_not_logged_in
+    set_picky
+    redirect_if_not_owner(@picky)
+    @picky.destroy
+    redirect '/pickies'
   end
-
 end
