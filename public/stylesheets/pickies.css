@@ -8,6 +8,7 @@ col {
 }
 tr:hover {
     background: lightblue;
+    border-radius: 25px;
 }
 
 th, td {
