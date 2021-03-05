@@ -12,12 +12,17 @@ class ProductsController < ApplicationController
   end
 
   post '/pickies' do
-    user = User.find_by_id(session[:id])
-    product = user.products.create(params[:product])
-    location = Location.find_or_create_by(params[:location])
-    product.location_id = location.id
-    product.save
-    redirect '/pickies'
+    if picky_valid?
+      user = User.find_by_id(session[:id])
+      product = user.products.create(params[:product])
+      location = Location.find_or_create_by(params[:location])
+      product.location_id = location.id
+      product.save
+      redirect '/pickies'
+    else
+      flash[:message] = "Information is missing. Please fill in all the blanks."
+      redirect '/pickies/new'
+    end
   end
 
   get '/pickies/:id' do

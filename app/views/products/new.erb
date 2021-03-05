@@ -1,5 +1,6 @@
 <h2>New Picky</h2>
-
+<%=flash[:message]%>
+<br>
 <form action="/pickies" method="POST">
 <label>What is it?</label>
 <input type="text" name="product[name]" placeholder="Toaster">

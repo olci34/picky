@@ -9,6 +9,8 @@ class ApplicationController < Sinatra::Base
     set :session_secret, 'secret'
   end
 
+  register Sinatra::Flash
+
   get "/" do
     if !logged_in?
       erb :welcome
@@ -40,6 +42,7 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_owner(obj)
+      flash[:message] = "This item does not belong to you"
       redirect '/pickies' if !check_owner(obj)
     end
 
@@ -51,7 +54,7 @@ class ApplicationController < Sinatra::Base
 
     def password_valid?(password)
       # ^[a-zA-Z0-9]{4,8}$
-      passcode = password.match(/^[a-zA-Z0-9]{4,8}$/)
+      passcode = password.match(/^[a-zA-Z0-9]{6,10}$/)
       passcode.to_s == password if passcode
     end
 
@@ -63,6 +66,11 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def picky_valid?
+      name_valid = !params[:product].values.any? {|v| v.strip == ""}
+      location_valid = !params[:location].values.any? {|v| v.strip == ""}
+      name_valid && location_valid
+    end
   end
 
 end

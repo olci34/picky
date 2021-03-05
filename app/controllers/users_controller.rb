@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       session[:id] = user.id
       redirect '/pickies'
     else
+      flash[:message] = "Username should include 4 to 8 word characters (letter, number, underscore). Password should include 6 to 10 characters of alphabet and/or digits"
       redirect '/signup'
     end
   end
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
       session[:id] = user.id
       redirect '/pickies'
     else
+      flash[:message] = "You entered invalid username or password"
       redirect '/login'
     end
   end

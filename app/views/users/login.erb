@@ -1,6 +1,6 @@
 <h4> Log In</h4>
 <br>
-
+<%= flash[:message] %>
 <form action="/login" method="POST">
 
 <label>Username:</label>
@@ -10,7 +10,7 @@
 
 <label>Password:</label>
 <br>
-<input type="text" name="user[password]" id="password">
+<input type="password" name="user[password]" id="password">
 <br><br>
 
 <button type="submit">Log In</button>

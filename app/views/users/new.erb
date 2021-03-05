@@ -1,5 +1,6 @@
 <h4>Sign Up</h4>
 <br>
+<%=flash[:message]%>
 <form action="/signup" method="POST">
 <label>Username:</label>
 <br>
@@ -11,7 +12,7 @@
 <br><br>
 <label>Password:</label>
 <br>
-<input type="text" name="user[password]" id="password">
+<input type="password" name="user[password]" id="password">
 <br><br>
 <button type="submit">Sign Up</button>
 </form>
