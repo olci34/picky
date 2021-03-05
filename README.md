@@ -30,6 +30,8 @@ When any usernames is clicked, user will be navigated to selected user's pickies
 ### Pickies
 
 When any picky is clicked, user will be navigated to selected pickies detail page which includes picky's name, location and user who posted.  
+#### Post Picky
+In order to post a picky, click to **Create Picky** from navigation bar and fill out the form. All empty boxes should be filled. Then clicked **Create**.
 #### Edit/Delete Picky
 A selected picky can be edited or deleted only by its user. For other users pickies edit and delete buttons won't be enabled.
 
