@@ -40,7 +40,27 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_owner(obj)
-        redirect '/pickies' if !check_owner(obj)
+      redirect '/pickies' if !check_owner(obj)
+    end
+
+    def username_valid?(username)
+      # ^[a-zA-Z0-9]{4,8}$
+      word = username.match(/^[a-zA-Z0-9]\w{3,7}$/)
+      word.to_s == username if word
+    end
+
+    def password_valid?(password)
+      # ^[a-zA-Z0-9]{4,8}$
+      passcode = password.match(/^[a-zA-Z0-9]{4,8}$/)
+      passcode.to_s == password if passcode
+    end
+
+    def signup_valid?(hash)
+      if !params[:user].values.any? {|v| v == ""}
+        username_valid?(hash[:username]) && password_valid?(hash[:password])
+      else
+        false
+      end
     end
 
   end

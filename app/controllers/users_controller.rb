@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if !params[:user].values.any? {|v| v == ""}
+    if signup_valid?(params[:user])
       user = User.create(params[:user])
       session[:id] = user.id
       redirect '/pickies'
