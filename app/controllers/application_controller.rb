@@ -42,7 +42,6 @@ class ApplicationController < Sinatra::Base
     end
 
     def redirect_if_not_owner(obj)
-      flash[:message] = "This item does not belong to you"
       redirect '/pickies' if !check_owner(obj)
     end
 
@@ -59,18 +58,13 @@ class ApplicationController < Sinatra::Base
     end
 
     def signup_valid?(hash)
-      if !params[:user].values.any? {|v| v == ""}
+      if !params[:user].values.any? {|v| v.strip == ""}
         username_valid?(hash[:username]) && password_valid?(hash[:password])
       else
         false
       end
     end
 
-    def picky_valid?
-      name_valid = !params[:product].values.any? {|v| v.strip == ""}
-      location_valid = !params[:location].values.any? {|v| v.strip == ""}
-      name_valid && location_valid
-    end
   end
 
 end

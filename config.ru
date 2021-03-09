@@ -1,7 +1,7 @@
 require './config/environment'
 
-use Rack::MethodOverride ###medium
-run ApplicationController
+use Rack::MethodOverride
 use LocationsController
 use ProductsController
 use UsersController
+run ApplicationController

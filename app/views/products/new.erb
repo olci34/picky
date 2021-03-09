@@ -1,5 +1,8 @@
+<style>
+.warning {color:red;}
+</style>
 <h2>New Picky</h2>
-<%=flash[:message]%>
+<div class="warning"><%=flash[:message]%></div>
 <br>
 <form action="/pickies" method="POST">
 <label>What is it?</label>

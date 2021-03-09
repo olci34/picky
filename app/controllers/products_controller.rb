@@ -12,9 +12,9 @@ class ProductsController < ApplicationController
   end
 
   post '/pickies' do
-    if picky_valid?
-      user = User.find_by_id(session[:id])
-      product = user.products.create(params[:product])
+    user = User.find_by_id(session[:id])
+    product = user.products.create(params[:product])
+    if product.valid?
       location = Location.find_or_create_by(params[:location])
       product.location_id = location.id
       product.save
@@ -45,8 +45,13 @@ class ProductsController < ApplicationController
   patch '/pickies/:id' do
     redirect_if_not_logged_in
     set_picky
+    if @picky.update(params[:product])
     @picky.location.update(params[:location])
-    @picky.update(params[:product])
+    
+    
+    else
+      flash[:message] = "Picky name can't be blank."
+    end
     redirect "/pickies/#{@picky.id}"
   end
 
