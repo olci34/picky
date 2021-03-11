@@ -11,9 +11,8 @@ class ProductsController < ApplicationController
     erb :'products/new'
   end
 
-  post '/pickies' do
-    user = User.find_by_id(session[:id])
-    product = user.products.create(params[:product])
+  post '/pickies' do #######
+    product = current_user.products.create(params[:product])
     if product.valid?
       location = Location.find_or_create_by(params[:location])
       product.location_id = location.id
@@ -45,10 +44,9 @@ class ProductsController < ApplicationController
   patch '/pickies/:id' do
     redirect_if_not_logged_in
     set_picky
+    redirect_if_not_owner(@picky)
     if @picky.update(params[:product])
     @picky.location.update(params[:location])
-    
-    
     else
       flash[:message] = "Picky name can't be blank."
     end

@@ -9,14 +9,14 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if signup_valid?(params[:user])
       user = User.create(params[:user])
-      session[:id] = user.id
-      redirect '/pickies'
-    else
-      flash[:message] = "Username should include 4 to 8 word characters (letter, number, underscore). Password should include 6 to 10 characters of alphabet and/or digits"
-      redirect '/signup'
-    end
+      if user.valid?
+        session[:id] = user.id
+        redirect '/pickies'
+      else
+        flash[:message] = user.errors.full_messages.to_sentence
+        redirect '/signup'
+      end
   end
 
   get '/login' do
